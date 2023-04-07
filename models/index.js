@@ -5,7 +5,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(
     {
         dialect: 'sqlite',
-        storage: '../todo.sqlite',
+        storage: './todo.sqlite',
           dialectOptions: {
             foreignKeys: true
         }
