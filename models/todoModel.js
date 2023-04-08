@@ -1,14 +1,12 @@
+
 module.exports = (sequelize, DataTypes) => {
     const Todo = sequelize.define('todos', {
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        category: {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement:true
+          },
+        text: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -18,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false
 
         }
-    });
-   
-    // Todo.belongsTo(User, { foreignKey: 'userId' });
-    return Todo;
-}
+
+    })
+    return Todo
+    }
+//foreignkey

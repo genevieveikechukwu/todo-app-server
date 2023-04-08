@@ -1,11 +1,16 @@
+const dotenv = require('dotenv')
+
+dotenv.config({path: './config.env'})
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
 
+
+
 var corOptions = {
     origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 }
@@ -20,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const todoRouter = require('./routes/todoRoutes')
 const userRouter = require('./routes/userRoutes')
 app.use('/api/todo', todoRouter)
-app.use('/api/signup', userRouter)
+app.use('/api/todo', userRouter)
 // testing API
 
 app.get('/', (req, res) => {

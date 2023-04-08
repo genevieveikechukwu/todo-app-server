@@ -8,18 +8,19 @@ const Todo = db.todos
 //CREATE
 
 const addTodo = async (req, res) => {
-    let info = {
-        title: req.body.title,
-        description: req.body.description,
-        category: req.body.category,
-        status: req.body.status ? req.body.status : false
+    try {
+        let info = {
+            text: req.body.text,
+            status: req.body.status ? req.body.status : false
+        }
+
+        const todo = await Todo.create(info)
+        res.status(201).send(todo)
+        console.log(todo.data)
+    } catch (error) {
+        console.log(error)
     }
-
-    const todo = await Todo.create(info)
-    res.status(201).send(todo)
-    console.log(todo)
 }
-
 //READ all todos
 const getAllTodos = async (req, res) => {
     let todoGet = await Todo.findAll({})
@@ -34,35 +35,32 @@ const getTodoById = async (req, res) => {
     res.status(200).send(getATodo)
 }
 
-// const getTodoByCategory = async (req, res) => {
-//     let category = req.params.category
-//     let getTodoWithCategory = await Todo.findAll({attributes: ["Work"]})
-//     res.status(200).send(getTodoWithCategory)
-// }
-
-// const getTodoByTitle = async (req, res) => {
-//     let title = req.params.title
-//     let getTodoWithTitle = await Todo.findOne({ where: { title: title } })
-//    
-//     res.status(200).send(getTodoWithTitle)
-// }
 
 const completedTodo = async (req, res) => {
     const todos = await Todo.findAll({ where: { status: true } })
     res.status(200).send(todos)
+  
+    
 }
 
 //UPDATE
 
 const updateTodo = async (req, res) => {
     let id = req.params.id
-
-    const todo = await Todo.update(req.body, { where: { id: id } })
-    res.status(200).send({
-        message: "Updated Successfully!!"
+    Todo.findByPk(id).then(() => {
+        info = {
+            text: req.body.text,
+        }
+        const todo = Todo.update(info, { where: { id } })
+        res.status(200).send({
+            message: "Updated successfully"
+        })
     })
+            .catch((err) => {
+                console.lof(err)
+            });
+}
 
-} 
 
 //DELETE
 

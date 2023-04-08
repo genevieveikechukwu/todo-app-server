@@ -26,6 +26,7 @@ db.sequelize = sequelize
 
 db.todos = require('./todoModel.js')(sequelize, DataTypes)
 db.users = require('./userModel.js')(sequelize, DataTypes)
+db.validate = require('./userModel.js')(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
     .then(() => {
