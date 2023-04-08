@@ -34,17 +34,18 @@ const getTodoById = async (req, res) => {
     res.status(200).send(getATodo)
 }
 
-const getTodoByCategory = async (req, res) => {
-    let category = req.params.category
-    let getTodoWithCategory = await Todo.findAll({where: {category: category}})
-    res.status(200).send(getTodoWithCategory)
-}
+// const getTodoByCategory = async (req, res) => {
+//     let category = req.params.category
+//     let getTodoWithCategory = await Todo.findAll({attributes: ["Work"]})
+//     res.status(200).send(getTodoWithCategory)
+// }
 
-const getTodoByTitle = async (req, res) => {
-    let title = req.params.title
-    let getTodoWithTitle = await Todo.find({where: {title: title}})
-    res.status(200).send(getTodoWithTitle)
-}
+// const getTodoByTitle = async (req, res) => {
+//     let title = req.params.title
+//     let getTodoWithTitle = await Todo.findOne({ where: { title: title } })
+//    
+//     res.status(200).send(getTodoWithTitle)
+// }
 
 const completedTodo = async (req, res) => {
     const todos = await Todo.findAll({ where: { status: true } })
@@ -79,8 +80,6 @@ module.exports = {
     addTodo,
     getAllTodos,
     getTodoById,
-    getTodoByCategory,
-    getTodoByTitle,
     completedTodo,
     updateTodo,
     deleteTodo

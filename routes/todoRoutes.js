@@ -6,8 +6,6 @@ router.post('/add', todoController.addTodo)
 router.get('/', todoController.getAllTodos)
 router.get('/completed', todoController.completedTodo)
 router.get('/:id', todoController.getTodoById)
-router.get('/title', todoController.getTodoByTitle)
-router.get('/category', todoController.getTodoByCategory)
 router.put('/:id', todoController.updateTodo)
 router.delete('/:id', todoController.deleteTodo)
 
