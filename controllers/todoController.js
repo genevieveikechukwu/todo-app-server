@@ -59,12 +59,13 @@ const completedTodo = async (req, res) => {
 
 const updateTodo = async (req, res) => {
     let id = +req.params.id
-    Todo.findByPk(id).then(() => {
+    Todo.findOne({ where: { id: id } }).then(() => {
         info = {
             text: req.body.text,
         }
-        const todo = Todo.update(info, { where: {id: id } })
-    return  res.status(200).send({
+        const todo = Todo.update(info, { where: { id: id } })
+        return res.status(200).send({
+             todo,
             message: "Updated successfully"
         })
     })

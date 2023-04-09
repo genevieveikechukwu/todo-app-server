@@ -4,22 +4,28 @@ const validations = db.validate
 const bcrypt = require("bcrypt")
 
 const addUser = async (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+    if (!firstName || !lastName || !email || !password) {
+
+        return res.status(403).send({ message: "User details cannot be empty" })
+    }
+
     try {
-    const { error } = new validations(req.body);
-    if (error)
-        return res.status(400).send({ message: error.details[0].message });
-    const user = await User.findOne({ where: { email: req.body.email } });
-    if (user)
-        return res.status(409).send({ message: "User with email already exists" });
-    const salt = await bcrypt.genSalt(Number(process.env.SALT));
-    const hashPassword = await bcrypt.hash(req.body.password, salt);
-    await User.create({ ...req.body, password: hashPassword });
-    res.status(201).send({ message: "User has been created successfully" });
+        const { error } = new validations(req.body);
+        if (error)
+            return res.status(400).send({ message: error.details[0].message });
+        const user = await User.findOne({ where: { email: req.body.email } });
+        if (user)
+            return res.status(409).send({ message: "User with email already exists" });
+        const salt = await bcrypt.genSalt(Number(process.env.SALT));
+        const hashPassword = await bcrypt.hash(req.body.password, salt);
+        await User.create({ ...req.body, password: hashPassword });
+        res.status(201).send({ message: "User has been created successfully" });
 
     } catch (error) {
-        res.status(500).send({message: "Unable to create user"})
+        res.status(500).send({ message: "Unable to create user" })
     }
-  
+
 };
 
 module.exports = {
