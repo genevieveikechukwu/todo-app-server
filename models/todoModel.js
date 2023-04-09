@@ -1,18 +1,17 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Todo = sequelize.define('todos', {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement:true
-          },
         text: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notNull: {
+                    message: "Please enter a Todo Item"
+                }
+            }
         },
         status: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
             defaultValue: false
 
         }

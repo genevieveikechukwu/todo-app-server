@@ -24,9 +24,9 @@ const loginUser = async (req, res) => {
       .status(401)
       .send({ message: "Please check your password and try again" });
   const token = user.generateWebToken;
-  res.status(200).send({ data: token, message: "Logged in Successfully" });
+   return res.status(200).send({ data: token, message: "Logged in Successfully" });
   } catch (error) {
-      res.status(500).send({message: "Couldn't signin"})
+     return res.status(500).send({message: "Couldn't signin"})
   }
 };
 
