@@ -14,10 +14,12 @@ const sequelize = new Sequelize(
 sequelize.authenticate()
 
     .then(()=> {
-    console.log ('connected')
+    // console.log ('connected')
+        return({message: "connected"})
     })
     .catch(err => {
-    console.log('Error' + err)
+    // console.log('Error' + err)
+        return(err)
     })
 const db = {}
 

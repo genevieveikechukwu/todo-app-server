@@ -23,9 +23,9 @@ const addTodo = async (req, res) => {
 
         const todo = await Todo.create(info)
         res.status(201).send(todo)
-        console.log(todo.data)
+        // console.log(todo.data)
     } catch (error) {
-        console.log(error)
+        res.status(201).send(error)
     }
 }
 //READ all todos
@@ -70,7 +70,8 @@ const updateTodo = async (req, res) => {
         })
     })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
+            res.status(404).send({message: err})
         });
 }
 
