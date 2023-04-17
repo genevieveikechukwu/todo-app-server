@@ -1,6 +1,8 @@
 const db = require('../models')
 const User = db.users
-const validations = db.validate
+const joi = require("joi");
+const passwordComplexity = require('joi-password-complexity');
+
 const bcrypt = require("bcrypt")
 
 const addUser = async (req, res) => {
@@ -11,7 +13,17 @@ const addUser = async (req, res) => {
     }
 
     try {
-        const { error } = new validations(req.body);
+        const validate = (data) => {
+            const fields = joi.object({
+                firstName: joi.string().required().label("First Name"),
+                lastName: joi.string().required().label("Last Name"),
+                email: joi.string().email().required().label("Email"),
+                password: passwordComplexity().required().label("Password")
+            })
+            return fields.validate(data)
+        };
+
+        const { error } =  validate(req.body);
         if (error)
             return res.status(400).send({ message: error.details[0].message });
         const user = await User.findOne({ where: { email: req.body.email } });
@@ -23,7 +35,8 @@ const addUser = async (req, res) => {
         res.status(201).send({ message: "User has been created successfully" });
 
     } catch (error) {
-        res.status(500).send({ message: "Unable to create user" })
+        res.status(500).send({ message: "Unable to create user, invalid email!!" })
+        // console.log(error)
     }
 
 };

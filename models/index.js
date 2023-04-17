@@ -2,14 +2,15 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize(
-    {
-        dialect: 'sqlite',
-        storage: './todo.sqlite',
-          dialectOptions: {
-            foreignKeys: true
-        }
-    });
+// const sequelize = new Sequelize('todo_db', 'postgres', '5103', {
+//     host: 'localhost',
+//     dialect: "postgres",
+//     port: "5432"
+// });
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './db.sqlite'
+});
 
 sequelize.authenticate()
 
@@ -28,7 +29,12 @@ db.sequelize = sequelize
 
 db.todos = require('./todoModel.js')(sequelize, DataTypes)
 db.users = require('./userModel.js')(sequelize, DataTypes)
-db.validate = require('./userModel.js')(sequelize, DataTypes)
+
+
+//relationships
+
+// db.users.hasMany(db.todos)
+// db.todos.belongsTo(db.users)
 
 db.sequelize.sync({ force: false })
     .then(() => {
