@@ -12,11 +12,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 //for sqllite
 
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: '../db.sqlite'
-});
-
+// const sequelize = new Sequelize({
+//     dialect: 'sqlite',
+//     storage: './db.sqlite'
+// });
+const sequelize = new Sequelize('sqlite::memory:')
 sequelize.authenticate()
 
     .then(()=> {
