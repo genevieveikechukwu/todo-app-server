@@ -17,10 +17,6 @@ const sequelize = new Sequelize({
     storage: './db.sqlite'
 });
 
-// const sequelize = new Sequelize(process.env.DATABASE_URI, {
-//     dialect: 'postgres',
-// });
-
 sequelize.authenticate()
 
     .then(()=> {
