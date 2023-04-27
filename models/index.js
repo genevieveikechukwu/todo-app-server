@@ -2,20 +2,6 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 
-//for my local host
-
-// const sequelize = new Sequelize('todo_db', 'postgres', '5103', {
-//     host: 'localhost',
-//     dialect: "postgres",
-//     port: "5432"
-// });
-
-//for sqllite
-
-// const sequelize = new Sequelize({
-//     dialect: 'sqlite',
-//     storage: './db.sqlite'
-// });
 
 
 const sequelize = new Sequelize(process.env.DATABASE_URI)
