@@ -36,7 +36,7 @@ const addUser = async (req, res) => {
 
     } catch (error) {
         res.status(500).send({ message: "Unable to create user, invalid email!!" })
-        // console.log(error)
+        console.log(error)
     }
 
 };

@@ -12,12 +12,12 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 //for sqllite
 
-// const sequelize = new Sequelize({
-//     dialect: 'sqlite',
-//     storage: './db.sqlite'
-// });
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './db.sqlite'
+});
 
-const sequelize = new Sequelize(process.env.DATABASE_URI)
+// const sequelize = new Sequelize(process.env.DATABASE_URI)
 
 
 sequelize.authenticate()
