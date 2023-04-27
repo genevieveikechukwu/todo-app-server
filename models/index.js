@@ -16,7 +16,10 @@ const { Sequelize, DataTypes } = require('sequelize');
 //     dialect: 'sqlite',
 //     storage: './db.sqlite'
 // });
-const sequelize = new Sequelize('sqlite::memory:')
+
+const sequelize = new Sequelize(process.env.DATABASE_URI)
+
+
 sequelize.authenticate()
 
     .then(()=> {
